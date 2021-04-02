@@ -1,11 +1,11 @@
 {
   "name": "strapi-plugin-repositories",
   "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "description": "Lista de repositórios do curso.",
   "strapi": {
-    "name": "repositories",
-    "icon": "plug",
-    "description": "Description of repositories plugin."
+    "name": "Repositories",
+    "icon": "code",
+    "description": "Lista de repositórios do curso."
   },
   "dependencies": {},
   "author": {
