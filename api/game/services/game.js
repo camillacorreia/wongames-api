@@ -23,6 +23,22 @@ async function getGameInfo(slug) {
   }
 }
 
+async function getByName(name, entityName) {
+  const item = await strapi.services[entityName].find({ name });
+  return item.length ? item[0] : null;
+}
+
+async function create(name, entityName) {
+  const item = await getByName(name, entityName);
+
+  if (!item) {
+    return await strapi.services[entityName].create({
+      name,
+      slug: slugify(name, { lower: true }),
+    });
+  }
+}
+
 module.exports = {
   populate: async (params) => {
     const gogApiUrl = `https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=popularity`;
@@ -31,16 +47,7 @@ module.exports = {
       data: { products }
     } = await axios.get(gogApiUrl);
 
-    await strapi.services.publisher.create({
-      name: products[1].publisher,
-      slug: slugify(products[1].publisher).toLowerCase()
-    });
-
-    await strapi.services.developer.create({
-      name: products[1].developer,
-      slug: slugify(products[1].developer).toLowerCase()
-    });
-
-    // console.log(await getGameInfo(products[1].slug));
+    await create(products[2].publisher, "publisher");
+    await create(products[2].developer, "developer");
   }
 };
