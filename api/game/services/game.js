@@ -32,7 +32,7 @@ async function getGameInfo(slug) {
       description: description.innerHTML
     }
   } catch(error) {
-    console.log("getGameInfo", Exception(e));
+    console.error("getGameInfo", Exception(error));
   }
 }
 
@@ -47,7 +47,7 @@ async function create(name, entityName) {
   if (!item) {
     return await strapi.services[entityName].create({
       name,
-      slug: slugify(name, { lower: true }),
+      slug: slugify(name, { strict: true, lower: true }),
     });
   }
 }
@@ -77,7 +77,7 @@ async function setImage({ image, game, field = "cover" }) {
       },
     });
   } catch(error) {
-    console.log("setImage", Exception(e));
+    console.error("setImage", Exception(error));
   }
 }
 
@@ -168,7 +168,7 @@ module.exports = {
       await createManyToManyData(products);
       await createGames(products);
     } catch(error) {
-      console.log("populate", Exception(e));
+      console.error("populate", Exception(error));
     }
   }
 };
