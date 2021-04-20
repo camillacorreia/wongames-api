@@ -77,14 +77,13 @@
       "via": "games",
       "dominant": true
     },
-    "plataforms": {
-      "collection": "plataform",
-      "via": "games",
-      "dominant": true
-    },
     "publisher": {
       "model": "publisher",
       "via": "games"
+    },
+    "platforms": {
+      "via": "games",
+      "collection": "platform"
     }
   }
 }
